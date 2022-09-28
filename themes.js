@@ -2,7 +2,7 @@
  * Configuration variables
  */
 let defaultThemeId = 'default';
-let themes = {'dark-theme': 'Dark', 'light-theme': 'Light', 'default': 'Use browser default'};
+let themes = {'default': 'Use browser default', 'dark-theme': 'Dark', 'light-theme': 'Light'};
 let currentTheme;
 
 /*
@@ -25,20 +25,6 @@ function setTheme(newThemeId) {
   body.classList.toggle(newThemeId);
 }
 
-function addThemeToDom(themeId) {
-  let linkTag = document.createElement('link');
-  linkTag.rel = 'stylesheet';
-  linkTag.href = `/${themeId}.css`;
-
-  // If this is a non-default stylesheet (i.e. an actual theme) add an id so we can work with it
-  if (Object.hasOwn(themes, themeId)) {
-    linkTag.id = themeId;
-  }
-
-  document.getElementsByTagName('head')[0].appendChild(linkTag);
-  console.log(`Added theme ${themeId} to DOM.`);
-}
-
 function getDefaultTheme() {
   // Code to detect dark mode preference from https://stackoverflow.com/questions/56393880/how-do-i-detect-dark-mode-using-javascript
   if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
@@ -51,6 +37,19 @@ function getDefaultTheme() {
 /*
  * Initial page setup
  */
-document.addEventListener("DOMContentLoaded", function(){
-  setTheme(getDefaultTheme());
+document.addEventListener('DOMContentLoaded', function(){
+  let selector = document.getElementById('theme-selector');
+
+  for (let themeId in themes) {
+    let option = document.createElement('option');
+    option.value = themeId;
+    option.innerHTML = themes[themeId];
+    selector.appendChild(option);
+    console.log(`Added ${themeId} to dropdown`);
+  }
+
+  selector.addEventListener('input', e => setTheme(e.target.value));
+
+  selector.value = 'default';
+  setTheme('default');
 });

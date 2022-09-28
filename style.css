@@ -22,8 +22,6 @@ to this section's matching END comment to see page-specific styles.
   --image-margin: 3rem;
   --font-family: "HK Grotesk";
   --font-family-header: "HK Grotesk";
-
-  /* These variables constitute the "light theme" version of the page */
 }
 
 .light-theme {
@@ -81,11 +79,6 @@ a:not(.btn--remix):visited {
 }
 .footer a:hover {
   background: var(--color-primary);
-}
-
-.footer .links {
-  padding: 0.5rem 1rem 1.5rem;
-  white-space: nowrap;
 }
 
 .divider {
