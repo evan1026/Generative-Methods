@@ -8,6 +8,7 @@ let themes = {'style-dark': 'Dark', 'style-light': 'Light'};
  * Functions related to changing the theme
  */
 function setTheme(newThemeId) {
+  // Code for switching themes based on https://stackoverflow.com/questions/19844545/replacing-css-file-on-the-fly-and-apply-the-new-style-to-the-page
   for (let themeId in themes) {
     document.getElementById(themeId).disabled = true;
   }
@@ -41,11 +42,12 @@ function getDefaultTheme() {
 /*
  * Initial page setup
  */
-addThemeToDom(commonThemeFile);
+document.addEventListener("DOMContentLoaded", function(){
+  addThemeToDom(commonThemeFile);
 
-for (let theme in themes) {
-  addThemeToDom(theme);
-}
+  for (let theme in themes) {
+    addThemeToDom(theme);
+  }
 
-setTheme(getDefaultTheme());
-
+  setTheme(getDefaultTheme());
+});
