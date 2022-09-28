@@ -1,19 +1,28 @@
 /*
  * Configuration variables
  */
-let commonThemeFile = 'style'
-let themes = {'style-dark': 'Dark', 'style-light': 'Light'};
+let defaultThemeId = 'default';
+let themes = {'dark-theme': 'Dark', 'light-theme': 'Light', 'default': 'Use browser default'};
+let currentTheme;
 
 /*
  * Functions related to changing the theme
  */
 function setTheme(newThemeId) {
-  // Code for switching themes based on https://stackoverflow.com/questions/19844545/replacing-css-file-on-the-fly-and-apply-the-new-style-to-the-page
-  for (let themeId in themes) {
-    document.getElementById(themeId).disabled = true;
+  // Code for switching themes based on https://blog.logrocket.com/how-to-create-better-themes-with-css-variables-5a3744105c74/
+
+  let body = document.getElementsByTagName('body')[0];
+
+  if (currentTheme !== undefined) {
+    body.classList.toggle(currentTheme);
   }
-  document.getElementById(newThemeId).disabled = false;
-  console.log(`Set current theme to ${themes[newThemeId]}.`);
+
+  if (newThemeId === defaultThemeId) {
+    newThemeId = getDefaultTheme();
+  }
+
+  currentTheme = newThemeId;
+  body.classList.toggle(newThemeId);
 }
 
 function addThemeToDom(themeId) {
@@ -33,9 +42,9 @@ function addThemeToDom(themeId) {
 function getDefaultTheme() {
   // Code to detect dark mode preference from https://stackoverflow.com/questions/56393880/how-do-i-detect-dark-mode-using-javascript
   if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
-    return 'style-dark';
+    return 'dark-theme';
   } else {
-    return 'style-light';
+    return 'light-theme';
   }
 }
 
@@ -43,11 +52,5 @@ function getDefaultTheme() {
  * Initial page setup
  */
 document.addEventListener("DOMContentLoaded", function(){
-  addThemeToDom(commonThemeFile);
-
-  for (let theme in themes) {
-    addThemeToDom(theme);
-  }
-
   setTheme(getDefaultTheme());
 });

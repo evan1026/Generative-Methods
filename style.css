@@ -22,6 +22,20 @@ to this section's matching END comment to see page-specific styles.
   --image-margin: 3rem;
   --font-family: "HK Grotesk";
   --font-family-header: "HK Grotesk";
+
+  /* These variables constitute the "light theme" version of the page */
+}
+
+.light-theme {
+  --color-bg: #fff;
+  --color-main-text: #000;
+  --color-separator: #000;
+}
+
+.dark-theme {
+  --color-bg: #000;
+  --color-main-text: #fff;
+  --color-separator: #fff;
 }
 
 /* Basic page style resets */
