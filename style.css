@@ -19,19 +19,20 @@ to this section's matching END comment to see page-specific styles.
   --color-primary: #FFFF00;
   --font-family: "HK Grotesk";
   --font-family-header: "HK Grotesk";
+  --separator-width: 2px;
 }
 
 .light-theme {
   --color-bg: #fff;
-  --color-main-text: #000;
-  --color-separator: #000;
+  --color-main-text: #222;
+  --color-separator: #444;
   --github-logo: url("https://cdn.glitch.global/903c4ba5-9ead-4808-9a2d-e35d2bbd6c31/GitHub-Mark-64px.png?v=1664404019285");
 }
 
 .dark-theme {
-  --color-bg: #000;
-  --color-main-text: #fff;
-  --color-separator: #fff;
+  --color-bg: #222;
+  --color-main-text: #eee;
+  --color-separator: #999;
   --github-logo: url("https://cdn.glitch.global/903c4ba5-9ead-4808-9a2d-e35d2bbd6c31/GitHub-Mark-Light-64px.png?v=1664404027250");
 }
 
@@ -67,7 +68,7 @@ html, body {
   padding: 1rem 0 0.75rem 0;
   width: 100%;
   flex-wrap: wrap;
-  border-top: 4px solid var(--color-separator);
+  border-top: var(--separator-width) solid var(--color-separator);
 }
 
 body {
@@ -81,7 +82,7 @@ body {
 }
 
 .sidebar {
-  border-right: 4px solid var(--color-separator);
+  border-right: var(--separator-width) solid var(--color-separator);
   padding-right: 1rem;
   display: flex;
   flex-direction: column;
