@@ -23,6 +23,8 @@ function setTheme(newThemeId) {
 
   currentTheme = newThemeId;
   body.classList.toggle(newThemeId);
+
+  console.log(`Switched theme to ${newThemeId}`);
 }
 
 function getDefaultTheme() {
