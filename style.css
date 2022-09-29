@@ -10,7 +10,10 @@
   --color-main-text: #222;
   --color-separator: #444;
   --color-interaction: #ddd;
+  --color-card: #eee;
+  --color-card-header: #fbfbfb;
   --github-logo: url("https://cdn.glitch.global/903c4ba5-9ead-4808-9a2d-e35d2bbd6c31/GitHub-Mark-64px.png?v=1664404019285");
+  --a1-image: url("https://cdn.glitch.global/903c4ba5-9ead-4808-9a2d-e35d2bbd6c31/Screenshot_2022-09-28_19-37-53.png?v=1664411883344");
 }
 
 .dark-theme {
@@ -18,7 +21,10 @@
   --color-main-text: #eee;
   --color-separator: #999;
   --color-interaction: #444;
+  --color-card: #333;
+  --color-card-header: #2b2b2b;
   --github-logo: url("https://cdn.glitch.global/903c4ba5-9ead-4808-9a2d-e35d2bbd6c31/GitHub-Mark-Light-64px.png?v=1664404027250");
+  --a1-image: url("https://cdn.glitch.global/903c4ba5-9ead-4808-9a2d-e35d2bbd6c31/Screenshot_2022-09-28_19-34-09.png?v=1664411665420");
 }
 
 /* Basic page style resets */
@@ -109,10 +115,55 @@ h2 {
 
 a {
   text-decoration: none;
+  color: inherit;
 }
 
 .interaction {
   background-color: var(--color-interaction);
   color: var(--color-main-text);
   border-style: none;
+}
+
+.content {
+  display: flex;
+  flex: 1;
+  flex-wrap: wrap;
+  align-content: space-evenly;
+  justify-content: space-evenly;
+}
+
+.card {
+  width: 300px;
+  background-color: var(--color-card);
+  box-shadow: 0 1px 4px 0 rgba(0, 0, 0, 0.2), 0 6px 14px 0 rgba(0, 0, 0, 0.2);
+  margin: 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.card p {
+  text-align: center;
+}
+
+.card h2 {
+  margin: 0;
+}
+
+.card-header-container {
+  background-color: var(--color-card-header);
+  padding: 10px 0;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  border-bottom: 1px solid var(--color-interaction);
+}
+
+.card > img {
+  width: 100%;
+  height: auto;
+}
+
+#a1-image {
+  content: var(--a1-image);
 }
