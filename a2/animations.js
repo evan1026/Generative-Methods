@@ -150,45 +150,61 @@ let animations = [
       let count = 2;
       let noiseScale = 0.02;
 
+      // This function allows us to manipulate the framebuffer directly
       p.loadPixels();
+
+      // Pixel density I think means how many of framebuffer pixels there are per pixel on the screen
+      // Regardless, it's used to index into the framebuffer
+      let d = p.pixelDensity();
+
+      // Loop through each tile (which contains count x count pixels)
       for (let j = 0; j < p.height / count; j++) {
         for (let i = 0; i < p.width / count; i++) {
+
+          // Get perlin noise value
           let noiseVal = 2 * p.noise(startX + i * noiseScale, startY + j * noiseScale, startZ) - 1;
 
+          // Set color based on noise
           let hue = 0;
           let sat = 100;
-          let value = 50;
+          let light = 50;
 
           if (noiseVal < 0) {
             hue = 240;
-            value = 50 + noiseVal * 50;
+            light = 50 + noiseVal * 50;
           } else if (noiseVal < 0.1) {
             hue = 60;
           } else if (noiseVal < 0.5) {
             hue = 120;
-            value = 50 - noiseVal * 50;
+            light = 50 - noiseVal * 50;
           } else if (noiseVal < 0.6) {
             sat = 0;
-            value = 100 - noiseVal * 100;
+            light = 100 - noiseVal * 100;
           } else {
             sat = 0;
-            value = 100;
+            light = 100;
           }
 
+          // Clamp values in case I messed up the ranges
           sat = clamp(sat, 0, 100);
           value = clamp(value, 0, 100);
 
+          // Convert to RGB so we can put it in the framebuffe
           let rgb = hslToRgb((hue % 360) / 360, sat / 100, value / 100);
 
-          // Hyperperformant loop to set pixels based on noise values
+          // Below is a hyperperformant loop to set pixels based on the calculated colors
           // Doing it this way allows for much higher resolutions
           // Based on https://discourse.processing.org/t/pushing-a-7712x960-binary-image-to-p5-js-is-super-slow-is-there-a-better-way/371
-          let d = p.pixelDensity();
+
+          // Loop through pixels in this tile
           for (let y = j * count; y < (j + 1) * count; ++y) {
             for (let x = i * count ; x < (i + 1) * count; ++x) {
+
+              // Loop through subpixels in this pixel
               for (let subpixelY = 0; subpixelY < d; ++subpixelY) {
                 for (let subpixelX = 0; subpixelX < d; ++subpixelX) {
-                  // loop over
+
+                  // Set the value of the pixel in the framebuffer
                   index = 4 * ((y * d + subpixelY) * p.width * d + (x * d + subpixelX));
                   p.pixels[index] = rgb[0];
                   p.pixels[index+1] = rgb[1];
