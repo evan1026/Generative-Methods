@@ -1,5 +1,9 @@
 const SWATCH_SIZE = 300;
 
+function clamp(number, min, max) {
+  return Math.min(Math.max(number, min), max);
+}
+
 let animations = [
   {
     title: "Bouncy Ball",
@@ -86,6 +90,63 @@ let animations = [
         let y = 150 + Math.cos(angle) * 75;
         p.fill(360 * i / this.numLines, 100, 50);
         p.circle(x, y, 5);
+      }
+    },
+  },
+  {
+    title: "Landscape Exploration",
+    description:
+      "Based on the Perlin Noise example - this animation color codes sections of the noise to simulate the appearance of a landscape. Watch for dark ocean trenches and snow-capped peaks.",
+    isActive: true,
+
+    setup(p) {
+    },
+    draw(p, t) {
+      let startX = t;
+      let startY = t / 2;
+      let startZ = 0;
+
+      p.background(70);
+      p.fill(0);
+      // How many tiles and how big are they?
+      let count = 50;
+      let tileSize = p.width / count;
+      let noiseScale = 0.01;
+
+      for (let i = 0; i < count; i++) {
+        for (let j = 0; j < count; j++) {
+          let x = tileSize * i;
+          let y = tileSize * j;
+
+          let noiseVal = 2 * p.noise(startX + x * noiseScale, startY + y * noiseScale, startZ) - 1;
+
+          let hue = 0;
+          let sat = 100;
+          let value = 50;
+
+          if (noiseVal < 0) {
+            hue = 240;
+            value = 50 + noiseVal * 50;
+          } else if (noiseVal < 0.1) {
+            hue = 60;
+          } else if (noiseVal < 0.5) {
+            hue = 120;
+            value = 50 - noiseVal * 50;
+          } else if (noiseVal < 0.6) {
+            sat = 0;
+            value = 100 - noiseVal * 100;
+          } else {
+            sat = 0;
+            value = 100;
+          }
+
+          sat = clamp(sat, 0, 100);
+          value = clamp(value, 0, 100);
+
+          p.fill(hue % 360, sat, value, 1);
+          p.noStroke();
+          p.rect(x, y, tileSize * 0.9);
+        }
       }
     },
   },
