@@ -4,6 +4,43 @@ function clamp(number, min, max) {
   return Math.min(Math.max(number, min), max);
 }
 
+// Code from https://stackoverflow.com/questions/2353211/hsl-to-rgb-color-conversion
+/**
+ * Converts an HSL color value to RGB. Conversion formula
+ * adapted from http://en.wikipedia.org/wiki/HSL_color_space.
+ * Assumes h, s, and l are contained in the set [0, 1] and
+ * returns r, g, and b in the set [0, 255].
+ *
+ * @param   {number}  h       The hue
+ * @param   {number}  s       The saturation
+ * @param   {number}  l       The lightness
+ * @return  {Array}           The RGB representation
+ */
+function hslToRgb(h, s, l){
+    var r, g, b;
+
+    if(s == 0){
+        r = g = b = l; // achromatic
+    }else{
+        var hue2rgb = function hue2rgb(p, q, t){
+            if(t < 0) t += 1;
+            if(t > 1) t -= 1;
+            if(t < 1/6) return p + (q - p) * 6 * t;
+            if(t < 1/2) return q;
+            if(t < 2/3) return p + (q - p) * (2/3 - t) * 6;
+            return p;
+        }
+
+        var q = l < 0.5 ? l * (1 + s) : l + s - l * s;
+        var p = 2 * l - q;
+        r = hue2rgb(p, q, h + 1/3);
+        g = hue2rgb(p, q, h);
+        b = hue2rgb(p, q, h - 1/3);
+    }
+
+    return [Math.round(r * 255), Math.round(g * 255), Math.round(b * 255)];
+}
+
 let animations = [
   {
     title: "Bouncy Ball",
@@ -108,17 +145,15 @@ let animations = [
 
       p.background(70);
       p.fill(0);
-      // How many tiles and how big are they?
-      let count = 50;
-      let tileSize = p.width / count;
-      let noiseScale = 0.01;
 
-      for (let i = 0; i < count; i++) {
-        for (let j = 0; j < count; j++) {
-          let x = tileSize * i;
-          let y = tileSize * j;
+      // Size (in pixels) of each tile
+      let count = 2;
+      let noiseScale = 0.02;
 
-          let noiseVal = 2 * p.noise(startX + x * noiseScale, startY + y * noiseScale, startZ) - 1;
+      p.loadPixels();
+      for (let j = 0; j < p.height / count; j++) {
+        for (let i = 0; i < p.width / count; i++) {
+          let noiseVal = 2 * p.noise(startX + i * noiseScale, startY + j * noiseScale, startZ) - 1;
 
           let hue = 0;
           let sat = 100;
@@ -143,11 +178,29 @@ let animations = [
           sat = clamp(sat, 0, 100);
           value = clamp(value, 0, 100);
 
-          p.fill(hue % 360, sat, value, 1);
-          p.noStroke();
-          p.rect(x, y, tileSize * 0.9);
+          let rgb = hslToRgb((hue % 360) / 360, sat / 100, value / 100);
+
+          // Hyperperformant loop to set pixels based on noise values
+          // Doing it this way allows for much higher resolutions
+          // Based on https://discourse.processing.org/t/pushing-a-7712x960-binary-image-to-p5-js-is-super-slow-is-there-a-better-way/371
+          let d = p.pixelDensity();
+          for (let y = j * count; y < (j + 1) * count; ++y) {
+            for (let x = i * count ; x < (i + 1) * count; ++x) {
+              for (let subpixelY = 0; subpixelY < d; ++subpixelY) {
+                for (let subpixelX = 0; subpixelX < d; ++subpixelX) {
+                  // loop over
+                  index = 4 * ((y * d + subpixelY) * p.width * d + (x * d + subpixelX));
+                  p.pixels[index] = rgb[0];
+                  p.pixels[index+1] = rgb[1];
+                  p.pixels[index+2] = rgb[2];
+                  p.pixels[index+3] = 255;
+                }
+              }
+            }
+          }
         }
       }
+      p.updatePixels();
     },
   },
 ];
