@@ -86,6 +86,11 @@ body {
   justify-content: space-between;
 }
 
+.sidebar p a {
+  font-weight: bold;
+  text-decoration: underline;
+}
+
 #sidebar-top {
   display: flex;
   flex-direction: column;

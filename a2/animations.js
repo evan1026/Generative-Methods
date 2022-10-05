@@ -187,10 +187,10 @@ let animations = [
 
           // Clamp values in case I messed up the ranges
           sat = clamp(sat, 0, 100);
-          value = clamp(value, 0, 100);
+          light = clamp(light, 0, 100);
 
           // Convert to RGB so we can put it in the framebuffe
-          let rgb = hslToRgb((hue % 360) / 360, sat / 100, value / 100);
+          let rgb = hslToRgb((hue % 360) / 360, sat / 100, light / 100);
 
           // Below is a hyperperformant loop to set pixels based on the calculated colors
           // Doing it this way allows for much higher resolutions
