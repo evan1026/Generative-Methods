@@ -1,45 +1,75 @@
-
 <!DOCTYPE html>
-<meta charset="utf-8">
-<html>
+<html lang="en">
+  <head>
 
-<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="icon" href="https://glitch.com/favicon.ico" />
 
-	<!-- Google fonts, remove or replace! -->
-	<link rel="preconnect" href="https://fonts.googleapis.com">
-	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-	<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;800&family=Nunito:ital,wght@0,300;0,400;1,300&display=swap" rel="stylesheet">
+    <title>evan1026 - P5 Animations</title>
 
+    <!-- Meta tags for SEO and social sharing -->
+    <link rel="canonical" href="https://evan1026-a2.glitch.me/" />
+    <meta
+      name="description"
+      content="P5 Animations by evan1026."
+    />
+    <meta name="robots" content="index,follow" />
+    <meta property="og:title" content="evan1026 - P5 Animations" />
+    <meta property="og:type" content="article" />
+    <meta property="og:url" content="https://evan1026-a2.glitch.me/" />
+    <meta
+      property="og:description"
+      content="P5 Animations by evan1026"
+    />
+    <!--<meta
+      property="og:image"
+      content="https://cdn.glitch.global/903c4ba5-9ead-4808-9a2d-e35d2bbd6c31/Screenshot_2022-09-28_19-34-09.png?v=1664411665420"
+      />-->
+    <meta name="twitter:card" content="summary" />
 
-	<title>Kate Compton - P5 Animations</title>
+    <!-- CSS related -->
+    <link rel="stylesheet" href="/style.css" />
+    <script src="/themes.js" defer></script>
 
-	<!-- CSS -->
-	<link rel="stylesheet" href="style.css">
+		<script src="https://cdn.jsdelivr.net/npm/p5@1.4.2/lib/p5.js"></script>
+		<script  src="animations.js" ></script>
+		<script  src="app.js" ></script>
+  </head>
 
-	<!-- External libs -->
-<!-- 	<script  src="js/vendor/kates-utilities.js"></script> -->
-	<script src="https://cdn.jsdelivr.net/npm/p5@1.4.2/lib/p5.js"></script>
-	
-  <!-- Your code in here -->
-	<script  src="animations.js" ></script>
+  <body>
+    <div class="page">
 
-	<!-- Sets up all the swatches -->
-	<script  src="app.js" ></script>
+      <aside class="sidebar">
+        <div id="sidebar-top">
+          <img id="profilePic" src="https://cdn.glitch.global/903c4ba5-9ead-4808-9a2d-e35d2bbd6c31/BrvV0t9.png?v=1664402110564" />
+          <h2>evan1026</h2>
+          <p>Projects from <br /> Generative Methods</p>
+        </div>
+        <div id="sidebar-bottom">
+          <a href="https://github.com/evan1026">
+            <img class="social-media-img" id="github-logo"/>
+          </a>
+          <a href="https://www.linkedin.com/in/evan-allan/">
+            <img class="social-media-img" src="https://cdn.glitch.global/903c4ba5-9ead-4808-9a2d-e35d2bbd6c31/LI-In-Bug.png?v=1664404841862" />
+          </a>
+        </div>
+      </aside>
 
-	
-</head>
-<body>
-	<header>
-		<h1>Example animations</h1>
-		<a href="https://galaxykate-a1.glitch.me"> my portfolio</a>
-    <a href="https://glitch.com/edit/#!/galaxykate-a2">remix code</a>
-	</header>
+      <div class="content">
+				<div id="swatch-holder">
+					<!-- Content gets filled here by js -->
+				</div>
+      </div>
 
-	<div id="swatch-holder">
-		
-	</div>
-	
+    </div>
 
-</body>
-	
+    <footer class="footer">
+      <div id="footer-left-side"></div>
+      <div id="theme-selector-container">
+        <label for="theme-selector">Theme:</label>
+        <select name="theme-selector" id="theme-selector" class="interaction"></select>
+      </div>
+    </footer>
+  </body>
 </html>

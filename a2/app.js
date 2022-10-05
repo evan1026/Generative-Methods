@@ -5,7 +5,7 @@
  */
 
 window.addEventListener("load", function () {
-  console.log("LOADED")
+  console.log("APP.JS LOADED")
   let swatchHolderEl = document.getElementById("swatch-holder");
 
   // Function to add an element to a parent element

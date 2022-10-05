@@ -1,71 +1,196 @@
-html,body {
-	/* set a default font for the whole page */
-	font-family: 'Nunito', sans-serif; 
-	background-color: grey;
-	padding: 0px;
-	margin: 0px;
-	width: 100%;
-	height: 100%;
-	
+:root {
+  --color-primary: #FFFF00;
+  --font-family: "HK Grotesk";
+  --font-family-header: "HK Grotesk";
+  --separator-width: 2px;
+}
+
+.light-theme {
+  --color-bg: #fff;
+  --color-main-text: #222;
+  --color-separator: #444;
+  --color-interaction: #ddd;
+  --color-card: #eee;
+  --color-card-header: #fbfbfb;
+  --github-logo: url("https://cdn.glitch.global/903c4ba5-9ead-4808-9a2d-e35d2bbd6c31/GitHub-Mark-64px.png?v=1664404019285");
+  --a1-image: url("https://cdn.glitch.global/903c4ba5-9ead-4808-9a2d-e35d2bbd6c31/Screenshot_2022-09-28_19-37-53.png?v=1664411883344");
+}
+
+.dark-theme {
+  --color-bg: #222;
+  --color-main-text: #eee;
+  --color-separator: #999;
+  --color-interaction: #444;
+  --color-card: #333;
+  --color-card-header: #2b2b2b;
+  --github-logo: url("https://cdn.glitch.global/903c4ba5-9ead-4808-9a2d-e35d2bbd6c31/GitHub-Mark-Light-64px.png?v=1664404027250");
+  --a1-image: url("https://cdn.glitch.global/903c4ba5-9ead-4808-9a2d-e35d2bbd6c31/Screenshot_2022-09-28_19-34-09.png?v=1664411665420");
+}
+
+/* Basic page style resets */
+* {
+  box-sizing: border-box;
+}
+[hidden] {
+  display: none !important;
+}
+
+html, body {
+  height: 100%;
+}
+
+/* Import fonts */
+@font-face {
+  font-family: HK Grotesk;
+  src: url("https://cdn.glitch.me/605e2a51-d45f-4d87-a285-9410ad350515%2FHKGrotesk-Regular.otf?v=1603136326027")
+    format("opentype");
+}
+@font-face {
+  font-family: HK Grotesk;
+  font-weight: bold;
+  src: url("https://cdn.glitch.me/605e2a51-d45f-4d87-a285-9410ad350515%2FHKGrotesk-Bold.otf?v=1603136323437")
+    format("opentype");
+}
+
+/* Navigation grid */
+.footer {
+  display: flex;
+  justify-content: space-between;
+  padding: 1rem 0 0.75rem 0;
+  width: 100%;
+  flex-wrap: wrap;
+  border-top: var(--separator-width) solid var(--color-separator);
 }
 
 body {
-	display: flex;
-	flex-direction: column;
-	overflow: hidden;
-
+  font-family: HK Grotesk;
+  background-color: var(--color-bg);
+  color: var(--color-main-text);
+  display: flex;
+  flex-direction: column;
+  margin: 0;
+  padding: 8px;
 }
 
-header {
-	/* Make a top bar with a drop shadow, with horizontally-arranged items */
-	padding: 5px;
-	display: flex;
-	flex-direction: row;
-	justify-content: space-between;
-	background-color: white;
-	box-shadow: 1px 2px 4px rgba(0, 0, 0, .3);
+.sidebar {
+  border-right: var(--separator-width) solid var(--color-separator);
+  padding-right: 1rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
 }
 
-h1, h2, h3 {
-	margin: 0px;
-	font-family: 'Baloo 2', cursive;
+#sidebar-top {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
+.page {
+  flex: 1;
+  display: flex;
+}
 
+#profilePic {
+  width: 100px;
+  height: 100px;
+  object-fit: cover;
+  border-radius: 50px;
+  border: 2px solid var(--color-separator);
+}
+
+h2 {
+  margin: 10px 0;
+}
+
+#github-logo {
+  content: var(--github-logo);
+}
+
+.social-media-img {
+  height: 30px;
+  width: auto;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+.interaction {
+  background-color: var(--color-interaction);
+  color: var(--color-main-text);
+  border-style: none;
+}
+
+.content {
+  display: flex;
+  flex: 1;
+  flex-wrap: wrap;
+  align-content: space-evenly;
+  justify-content: space-evenly;
+}
+
+.card {
+  width: 300px;
+  background-color: var(--color-card);
+  box-shadow: 0 1px 4px 0 rgba(0, 0, 0, 0.2), 0 6px 14px 0 rgba(0, 0, 0, 0.2);
+  margin: 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.card p {
+  text-align: center;
+}
+
+.card h2 {
+  margin: 0;
+}
+
+.card-header-container {
+  background-color: var(--color-card-header);
+  padding: 10px 0;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  border-bottom: 1px solid var(--color-interaction);
+}
+
+.card > img {
+  width: 100%;
+  height: auto;
+}
 
 /* Tile layouts: https://mastery.games/post/tile-layouts/ */
 #swatch-holder {
-	
-	overflow: scroll;
-	
-	display: grid;
-	grid-template-columns: repeat(auto-fill, 400px);
-	grid-gap: 10px;
-	justify-content: center;
-	/*display: grid;
-	grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
-	 grid-auto-flow: dense;*/
+  overflow: scroll;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, 400px);
+  grid-gap: 10px;
+  justify-content: center;
+  width: 100%
 }
 
 .swatch {
-	/* A polaroid-style swatch with a white border */
-	/* Change the style if you want! */
-	padding:  10px;
-	margin:  10px;
-	background-color: white;
-	border-radius: 10px;
-
-	
-	box-shadow: 1px 10px 14px rgba(0, 0, 0, .3);
-	display: inline-flex;
-	flex-direction: column;
+  /* A polaroid-style swatch with a white border */
+  /* Change the style if you want! */
+  padding: 10px;
+  margin: 10px;
+  background-color: var(--color-card);
+  border-radius: 10px;
+  box-shadow: 0 1px 4px 0 rgba(0, 0, 0, 0.2), 0 6px 14px 0 rgba(0, 0, 0, 0.2);
+  display: inline-flex;
+  flex-direction: column;
 }
 
 .swatch canvas {
-	margin:  0px auto;
-	border:  2px solid rgba(0, 0, 0, .2);
+  margin: 0px auto;
+  border: 2px solid rgba(0, 0, 0, .2);
 }
 
-
 .swatch .title {
-	text-align: center;
+  text-align: center;
+}
