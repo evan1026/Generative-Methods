@@ -22,7 +22,7 @@ window.addEventListener("load", function () {
   // Create all of the swatches here
   animations.forEach((animation) => {
     if (animation.isActive) {
-      
+
       // Add a new div to hold the swatch
       let swatchEl = createElement("div", "swatch", swatchHolderEl);
 
