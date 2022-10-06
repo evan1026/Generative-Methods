@@ -219,4 +219,33 @@ let animations = [
       p.updatePixels();
     },
   },
+  {
+    title: "",
+    description: "",
+    isActive: true,
+
+    setup(p) {
+      this.thetaStep = 0.005;
+      this.maxTheta = 2 * p.PI;
+    },
+    draw(p, t) {
+      p.noStroke();
+      p.background(0);
+
+      for (let theta = 0; theta < this.maxTheta; theta += this.thetaStep) {
+        let scaledTheta = theta * t / 1;
+        let r = 50 * (1 - Math.cos(theta) * Math.sin(scaledTheta));
+
+        let x = p.width / 2 + r * Math.cos(theta);
+        let y = p.height / 2 + r * Math.sin(theta);
+
+        y = p.height - y;
+
+        let hue = theta / this.maxTheta * 360;
+
+        p.fill(hue, 100, 50);
+        p.circle(x, y, 2);
+      }
+    },
+  },
 ];
