@@ -176,7 +176,7 @@ a {
 
 /* Tile layouts: https://mastery.games/post/tile-layouts/ */
 #swatch-holder {
-  overflow: scroll;
+  overflow: auto;
   display: grid;
   grid-template-columns: repeat(auto-fill, 400px);
   grid-gap: 10px;
