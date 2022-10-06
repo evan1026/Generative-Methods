@@ -220,8 +220,9 @@ let animations = [
     },
   },
   {
-    title: "",
-    description: "",
+    // Semi-inspired by https://www.reddit.com/r/math/comments/1r3hls/polar_graphs/cdj9dam/
+    title: "Mathematical Windmill",
+    description: "A plot of (1 - arccos(sin(theta * t / 2)) * arcsin(cos(theta * t / 2))) from 0 to 2 * PI. The patterns formed by this formular go back and forth between unintelligible chaos and regular patterns. If you watch for long enough (roughly 40 minutes) the patterns eventually repeat themselves, meaning this is technically a looping animation, albeit far too long to make into a gif.",
     isActive: true,
 
     setup(p) {
@@ -233,8 +234,8 @@ let animations = [
       p.background(0);
 
       for (let theta = 0; theta < this.maxTheta; theta += this.thetaStep) {
-        let scaledTheta = theta * t / 1;
-        let r = 50 * (1 - Math.cos(theta) * Math.sin(scaledTheta));
+        let scaledTheta = theta * t / 2;
+        let r = 40 * (1 - Math.acos(Math.sin(scaledTheta)) * Math.asin(Math.cos(scaledTheta)));
 
         let x = p.width / 2 + r * Math.cos(theta);
         let y = p.height / 2 + r * Math.sin(theta);
