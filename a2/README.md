@@ -48,9 +48,9 @@ was just a collection of images.
 
 ## List any resources (code, images, etc) you've used, and where you got them from
 
-* https://stackoverflow.com/questions/2353211/hsl-to-rgb-color-conversion
+* [HSL to RGB conversion](https://stackoverflow.com/questions/2353211/hsl-to-rgb-color-conversion)
     * Used so I could still work in HSL in the landscape exploration even though the framebuffer is in RGB
-* https://discourse.processing.org/t/pushing-a-7712x960-binary-image-to-p5-js-is-super-slow-is-there-a-better-way/371
+* [How to fix p5 being slow](https://discourse.processing.org/t/pushing-a-7712x960-binary-image-to-p5-js-is-super-slow-is-there-a-better-way/371)
     * Helped me narrow down why things were running so slow with the perlin noise and gave a solution (writing to the framebuffer yourself)
 
 ## List any help you got from classmates or websites, so that you can remember it for later

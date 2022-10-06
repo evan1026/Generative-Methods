@@ -172,7 +172,7 @@ let animations = [
                 for (let subpixelX = 0; subpixelX < d; ++subpixelX) {
 
                   // Set the value of the pixel in the framebuffer
-                  index = 4 * ((y * d + subpixelY) * p.width * d + (x * d + subpixelX));
+                  let index = 4 * ((y * d + subpixelY) * p.width * d + (x * d + subpixelX));
                   p.pixels[index] = rgb[0];
                   p.pixels[index+1] = rgb[1];
                   p.pixels[index+2] = rgb[2];
@@ -228,7 +228,7 @@ let animations = [
     draw(p, t) {
       this.t += 0.01;
 
-      currentImg = p.get();
+      let currentImg = p.get();
 
       p.noStroke();
       p.background(0);
