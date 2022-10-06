@@ -14,6 +14,7 @@
   --color-card-header: #fbfbfb;
   --github-logo: url("https://cdn.glitch.global/903c4ba5-9ead-4808-9a2d-e35d2bbd6c31/GitHub-Mark-64px.png?v=1664404019285");
   --a1-image: url("https://cdn.glitch.global/903c4ba5-9ead-4808-9a2d-e35d2bbd6c31/Screenshot_2022-09-28_19-37-53.png?v=1664411883344");
+  --a2-image: url("https://cdn.glitch.global/903c4ba5-9ead-4808-9a2d-e35d2bbd6c31/a2-light.png?v=1665020406522");
 }
 
 .dark-theme {
@@ -25,6 +26,7 @@
   --color-card-header: #2b2b2b;
   --github-logo: url("https://cdn.glitch.global/903c4ba5-9ead-4808-9a2d-e35d2bbd6c31/GitHub-Mark-Light-64px.png?v=1664404027250");
   --a1-image: url("https://cdn.glitch.global/903c4ba5-9ead-4808-9a2d-e35d2bbd6c31/Screenshot_2022-09-28_19-34-09.png?v=1664411665420");
+  --a2-image: url("https://cdn.glitch.global/903c4ba5-9ead-4808-9a2d-e35d2bbd6c31/a2-dark.png?v=1665020375297");
 }
 
 /* Basic page style resets */
@@ -162,8 +164,4 @@ a {
 .card > img {
   width: 100%;
   height: auto;
-}
-
-#a1-image {
-  content: var(--a1-image);
 }
