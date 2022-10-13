@@ -36,6 +36,44 @@ let brushes = [
   },
 
   {
+    label: "⚫️",
+    isActive: true,
+    description: "Circle Tool. Click and drag from the center to the edge of the circle.",
+
+    mousePressed() {
+      p.loadPixels();
+      this.pixels = [...p.pixels];  // Save the original canvas so we can continually redraw over it
+      console.log("PRESSED");
+      console.log(this.pixels);
+      this.center = [p.mouseX, p.mouseY];
+    },
+
+    mouseReleased() {
+      this.pixels = [];  // Throw away the old canvas just to save some memory
+    },
+
+    mouseDragged() {
+      let x = p.mouseX;
+      let y = p.mouseY;
+
+      let dx = x - this.center[0];
+      let dy = y - this.center[1];
+      let radius = Math.sqrt(dx * dx + dy * dy);
+
+      p.loadPixels();
+      this.pixels.forEach((value, index) => {
+        p.pixels[index] = value;
+      });
+      p.updatePixels();
+
+      p.stroke(...color0);
+      p.fill(...color1);
+      p.strokeWeight(brushSize * 10 + 2);
+
+      p.ellipse(this.center[0], this.center[1], radius);
+    },
+  },
+  {
     label: "➰",
     isActive: true,
     description: "Smooth Shape Tool",
@@ -56,12 +94,14 @@ let brushes = [
       this.points.push([x, y]);
 
       p.loadPixels();
-      p.pixels = [...this.pixels];
+      this.pixels.forEach((value, index) => {
+        p.pixels[index] = value;
+      });
       p.updatePixels();
 
       p.stroke(...color0);
       p.fill(...color1);
-      p.strokeWeight(brushSize * 100 + 2);
+      p.strokeWeight(brushSize * 10 + 2);
 
       p.beginShape();
       this.points.forEach(point => {
