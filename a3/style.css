@@ -1,0 +1,161 @@
+:root {
+  --color-primary: #FFFF00;
+  --font-family: "HK Grotesk";
+  --font-family-header: "HK Grotesk";
+  --separator-width: 2px;
+}
+
+.light-theme {
+  --color-bg: #fff;
+  --color-main-text: #222;
+  --color-separator: #444;
+  --color-interaction: #ddd;
+  --color-card: #eee;
+  --color-card-header: #fbfbfb;
+  --github-logo: url("https://cdn.glitch.global/903c4ba5-9ead-4808-9a2d-e35d2bbd6c31/GitHub-Mark-64px.png?v=1664404019285");
+}
+
+.dark-theme {
+  --color-bg: #222;
+  --color-main-text: #eee;
+  --color-separator: #999;
+  --color-interaction: #444;
+  --color-card: #333;
+  --color-card-header: #2b2b2b;
+  --github-logo: url("https://cdn.glitch.global/903c4ba5-9ead-4808-9a2d-e35d2bbd6c31/GitHub-Mark-Light-64px.png?v=1664404027250");
+}
+
+/* Basic page style resets */
+* {
+  box-sizing: border-box;
+}
+[hidden] {
+  display: none !important;
+}
+
+html, body {
+  height: 100%;
+}
+
+/* Import fonts */
+@font-face {
+  font-family: HK Grotesk;
+  src: url("https://cdn.glitch.me/605e2a51-d45f-4d87-a285-9410ad350515%2FHKGrotesk-Regular.otf?v=1603136326027")
+    format("opentype");
+}
+@font-face {
+  font-family: HK Grotesk;
+  font-weight: bold;
+  src: url("https://cdn.glitch.me/605e2a51-d45f-4d87-a285-9410ad350515%2FHKGrotesk-Bold.otf?v=1603136323437")
+    format("opentype");
+}
+
+/* Navigation grid */
+.footer {
+  display: flex;
+  justify-content: space-between;
+  padding: 1rem 0px 0.75rem 0px;
+  flex-wrap: wrap;
+  border-top: var(--separator-width) solid var(--color-separator);
+  background-color: var(--color-bg);
+}
+
+body {
+  font-family: HK Grotesk;
+  background-color: var(--color-bg);
+  color: var(--color-main-text);
+  display: flex;
+  flex-direction: column;
+  margin: 0;
+  padding: 8px;
+}
+
+.sidebar {
+  border-right: var(--separator-width) solid var(--color-separator);
+  padding-right: 8px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.sidebar p a {
+  font-weight: bold;
+  text-decoration: underline;
+}
+
+#sidebar-top {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.page {
+  flex: 1;
+  display: flex;
+}
+
+#profilePic {
+  width: 100px;
+  height: 100px;
+  object-fit: cover;
+  border-radius: 50px;
+  border: 2px solid var(--color-separator);
+}
+
+h2 {
+  margin: 10px 0;
+}
+
+#github-logo {
+  content: var(--github-logo);
+}
+
+.social-media-img {
+  height: 30px;
+  width: auto;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+.interaction {
+  background-color: var(--color-interaction);
+  color: var(--color-main-text);
+  border-style: none;
+}
+
+.content {
+  display: flex;
+  flex: 1;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+  flex-direction: column;
+}
+
+#canvas-holder {
+  position: relative;
+  margin:  0px auto;
+}
+
+#controls {
+  bottom: 10px;
+  background-color: var(--color-interaction);
+  border-radius: 10px;
+  flex: 1;
+  margin: 10px;
+  border:  2px solid var(--color-separator);
+  box-shadow: 1px 3px 4px rgba(0, 0, 0, .3);
+  padding: 5px;
+}
+
+.row {
+  justify-content: space-around;
+  display: flex;
+  flex-direction: row;
+}
+
+
+

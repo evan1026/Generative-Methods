@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="icon" href="https://glitch.com/favicon.ico" />
+
+    <title>evan1026 - Drawing Tool</title>
+
+    <!-- Meta tags for SEO and social sharing -->
+    <link rel="canonical" href="https://evan1026-a3.glitch.me/" />
+    <meta
+      name="description"
+      content="Drawing Tool by evan1026."
+    />
+    <meta name="robots" content="index,follow" />
+    <meta property="og:title" content="evan1026 - Drawing Tool" />
+    <meta property="og:type" content="article" />
+    <meta property="og:url" content="https://evan1026-a3.glitch.me/" />
+    <meta
+      property="og:description"
+      content="Drawing Tool by evan1026"
+    />
+    <!--<meta
+      property="og:image"
+      content="https://cdn.glitch.global/903c4ba5-9ead-4808-9a2d-e35d2bbd6c31/Screenshot_2022-09-28_19-34-09.png?v=1664411665420"
+      />-->
+    <meta name="twitter:card" content="summary" />
+
+    <!-- CSS related -->
+    <link rel="stylesheet" href="/style.css" />
+    <script src="/themes.js" defer></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/p5@1.4.2/lib/p5.js"></script>
+    <script src="brushes.js"></script>
+    <script src="app.js" ></script>
+  </head>
+
+  <body>
+    <div class="page">
+
+      <aside class="sidebar">
+        <div id="sidebar-top">
+          <img id="profilePic" src="https://cdn.glitch.global/903c4ba5-9ead-4808-9a2d-e35d2bbd6c31/BrvV0t9.png?v=1664402110564" />
+          <h2>evan1026</h2>
+          <p>Drawing Tool</p>
+          <p><a href="//evan1026-a1.glitch.me">Home</a></p>
+        </div>
+        <div id="sidebar-bottom">
+          <a href="https://github.com/evan1026">
+            <img class="social-media-img" id="github-logo"/>
+          </a>
+          <a href="https://www.linkedin.com/in/evan-allan/">
+            <img class="social-media-img" src="https://cdn.glitch.global/903c4ba5-9ead-4808-9a2d-e35d2bbd6c31/LI-In-Bug.png?v=1664404841862" />
+          </a>
+        </div>
+      </aside>
+
+      <div class="content">
+        <div id="canvas-holder"></div>
+        <div id="controls">
+          <div id="brush-desc">-current brush-</div>
+          <div class="row">
+            <div id="buttons"></div>
+            <div class="">
+
+              <input type="color" id="color0" />
+              <input type="color" id="color1" />
+              <input type="range" id="size" min=0 max=1 step=".05" />
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <footer class="footer">
+      <div id="footer-left-side"></div>
+      <div id="theme-selector-container">
+        <label for="theme-selector">Theme:</label>
+        <select name="theme-selector" id="theme-selector" class="interaction"></select>
+      </div>
+    </footer>
+  </body>
+</html>
