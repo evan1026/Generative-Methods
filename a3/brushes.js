@@ -128,6 +128,87 @@ let brushes = [
       p.endShape();
     },
   },
+  {
+    label: "💥",
+    isActive: true,
+    description: "Firecracker Brush",
+
+    setup() {
+      this.points = [];
+      this.gravity = 10000;
+      this.prevT = p.millis() * 0.001;
+      this.colorProgression = [[60, 100, 50], [45, 100, 50], [30, 100, 50], [15, 100, 50], [0, 100, 50], [0, 100, 50], [0, 50, 50], [0, 25, 50], [0, 0, 50]];
+    },
+
+    mouseDragged() {
+    },
+
+    draw() {
+      if (p.mouseIsPressed) {
+        let x = p.mouseX;
+        let y = p.mouseY;
+
+        let xVel = 1000 * (Math.random() * 2 - 1);
+        let yVel = -1500 * Math.random();
+        let pt = [x, y, xVel, yVel];
+
+        pt.startingValues = [x, y, xVel, yVel];
+        pt.colorIndex = 0;
+        pt.spawnedChild = false;
+        pt.strokeWidth = 1;
+
+        // How long does this dot live?
+        pt.totalLifespan = 10 + Math.random()*30;
+
+        pt.lifespan = pt.totalLifespan
+        this.points.push(pt);
+      }
+
+      let t = p.millis() * .001;
+      let dt = t - this.prevT;
+
+      this.prevT = t;
+
+      let newPts = [];
+
+      // Each point keeps drawing itself, as long as it has a lifespan
+      this.points.forEach((pt, index) => {
+        pt.lifespan--;
+
+        if (pt.lifespan > 0) {
+
+          let prevX = pt[0];
+          let prevY = pt[1];
+
+          pt[3] += this.gravity * dt;
+
+          pt[0] += pt[2] * dt;
+          pt[1] += pt[3] * dt;
+
+          p.stroke(...this.colorProgression[pt.colorIndex]);
+          p.strokeWeight(pt.strokeWidth);
+          p.line(pt[0], pt[1], prevX, prevY);
+        }
+
+        if (pt.colorIndex < this.colorProgression.length - 1 && !pt.spawnedChild) {
+          let newPt = [pt.startingValues[0], pt.startingValues[1], pt.startingValues[2], pt.startingValues[3]];
+          newPt.startingValues = [pt.startingValues[0], pt.startingValues[1], pt.startingValues[2], pt.startingValues[3]];
+          newPt.colorIndex = pt.colorIndex + 1;
+          newPt.spawnedChild = false;
+          newPt.totalLifespan = pt.totalLifespan + 0.5;
+          newPt.lifespan = newPt.totalLifespan;
+          newPt.strokeWidth = pt.strokeWidth + 0.25;
+
+          pt.spawnedChild = true;
+
+          newPts.push(newPt);
+        }
+      });
+
+      this.points = this.points.filter(point => point.lifespan > 0);
+      this.points = this.points.concat(newPts);
+    },
+  },
 
   //======================================================
   // Example brushes
