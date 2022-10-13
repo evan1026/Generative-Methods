@@ -209,6 +209,29 @@ let brushes = [
       this.points = this.points.concat(newPts);
     },
   },
+  {
+    label: "⚇",
+    isActive: true,
+    description:
+    "Symmetric Line Tool",
+
+    draw() {
+      let x = p.mouseX;
+      let y = p.mouseY;
+      let x1 = p.pmouseX;
+      let y1 = p.pmouseY;
+
+      if (p.mouseIsPressed) {
+        p.stroke(...color0);
+
+        p.strokeWeight(brushSize * 10 + 2);
+        p.line(x, y, x1, y1);
+        p.line(CANVAS_WIDTH - x, y, CANVAS_WIDTH - x1, y1);
+        p.line(x, CANVAS_HEIGHT - y, x1, CANVAS_HEIGHT - y1);
+        p.line(CANVAS_WIDTH - x, CANVAS_HEIGHT - y, CANVAS_WIDTH - x1, CANVAS_HEIGHT - y1);
+      }
+    },
+  },
 
   //======================================================
   // Example brushes
