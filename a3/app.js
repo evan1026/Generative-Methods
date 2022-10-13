@@ -70,7 +70,7 @@ window.addEventListener("load", function () {
 
   const COLOR0_EL = document.getElementById("color0");
   const COLOR1_EL = document.getElementById("color1");
-  const SLIDER0_EL = document.getElementById("size");
+  const SLIDER0_EL = document.getElementById("brushSize");
   COLOR0_EL.value = HSLToHex(...color0);
   COLOR1_EL.value = HSLToHex(...color1);
   SLIDER0_EL.value = brushSize;

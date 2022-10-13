@@ -42,7 +42,7 @@ let brushes = [
     label: "✏️",
     isActive: true,
     description:
-      "A basic paint brush.  It uses the color0 and size properties set by the sliders.  It is a 'discrete' brush",
+    "A basic paint brush.  It uses the color0 and size properties set by the sliders.  It is a 'discrete' brush",
 
     // Options:
     // setup (when tool is selected),
@@ -66,7 +66,7 @@ let brushes = [
     label: "〰",
     isActive: true,
     description:
-      "A basic line brush.  It uses pmouseX,pmouseY to draw to where the last mouse position was.  It is a *continuous* brush",
+    "A basic line brush.  It uses pmouseX,pmouseY to draw to where the last mouse position was.  It is a *continuous* brush",
 
     // Using "draw" because pmouseX only remembers the mouse pos
     // each "frame" which is slightly different than
@@ -93,7 +93,7 @@ let brushes = [
     label: "🖌",
     isActive: true,
     description:
-      "Complicated discrete brush. It uses the color0, color1, and size properties set by the sliders",
+    "Complicated discrete brush. It uses the color0, color1, and size properties set by the sliders",
 
     setup() {
       //       Count how many times we've drawn
@@ -144,7 +144,7 @@ let brushes = [
   {
     label: "💦",
     description:
-      "Scatter brush, places lots of dots in both colors (discrete!)",
+    "Scatter brush, places lots of dots in both colors (discrete!)",
     isActive: true,
 
     mouseDragged() {
@@ -152,25 +152,25 @@ let brushes = [
       let x = p.mouseX;
       let y = p.mouseY;
 
-      let size = 20;
+      let brushSize = 20;
       let count = 6;
 
       // Scale the cluster by how far we have moved since last frame
       // the "magnitude" of the (movedX, movedY) vector
       let distanceTravelled = p.mag(p.movedX, p.movedY);
-      size = distanceTravelled * 2 + 10;
+      brushSize = distanceTravelled * 2 + 10;
 
       // I often draw a shadow behind my brush,
       // it helps it stand out from the background
       p.noStroke();
       p.fill(0, 0, 0, 0.01);
-      p.circle(x, y, size * 2);
+      p.circle(x, y, brushSize * 2);
 
       // Draw some dots
 
       for (var i = 0; i < count; i++) {
         // Offset a polar
-        let r = size * Math.random();
+        let r = brushSize * Math.random();
         let theta = Math.random() * Math.PI * 2;
 
         let brightnessBump = Math.random() * 50 - 20;
@@ -181,7 +181,7 @@ let brushes = [
           p.fill(color0[0], color0[1], color0[2] + brightnessBump, opacity);
         else p.fill(color1[0], color1[1], color1[2] + brightnessBump, opacity);
 
-        let circleSize = (Math.random() + 1) * size * 0.2;
+        let circleSize = (Math.random() + 1) * brushSize * 0.2;
 
         let x2 = x + r * Math.cos(theta);
         let y2 = y + r * Math.sin(theta);
@@ -199,33 +199,32 @@ let brushes = [
 
     mouseDragged() {
       let hearts = ["💙", "🧡", "💛", "💖", "💚", "💜"];
-      console.log("Drag...");
       let x = p.mouseX;
       let y = p.mouseY;
 
-      let size = 20;
+      let brushSize = 20;
       let count = 2;
 
       // Scale the cluster by how far we have moved since last frame
       // the "magnitude" of the (movedX, movedY) vector
       let distanceTravelled = p.mag(p.movedX, p.movedY);
-      size = distanceTravelled * 2 + 10;
+      brushSize = distanceTravelled * 2 + 10;
 
       // I often draw a shadow behind my brush,
       // it helps it stand out from the background
       p.noStroke();
       p.fill(0, 0, 0, 0.01);
-      p.circle(x, y, size * 2);
-      p.circle(x, y, size * 1);
+      p.circle(x, y, brushSize * 2);
+      p.circle(x, y, brushSize * 1);
 
       // Draw some emoji
       p.fill(1);
 
       for (var i = 0; i < count; i++) {
         // Offset a polar
-        let r = size * Math.random();
+        let r = brushSize * Math.random();
         let theta = Math.random() * Math.PI * 2;
-        p.textSize(size);
+        p.textSize(brushSize);
         let emoji = p.random(hearts);
 
         let x2 = x + r * Math.cos(theta);
@@ -266,7 +265,7 @@ let brushes = [
           let dy = 0;
 
           //         What happens if we offset the x and y we are drawing?
-            // dx = Math.random()*100
+          // dx = Math.random()*100
           // dy = Math.random()*10
 
           p.curveVertex(x + dx, y + dy);
@@ -291,13 +290,13 @@ let brushes = [
       let x = p.mouseX;
       let y = p.mouseY;
       let pt = [x, y];
-      
+
       // How long does this dot live?
       pt.totalLifespan = 10 + Math.random()*10;
-      
+
       // Try a longer lifespan 😉
       // pt.totalLifespan = 10 + Math.random()*100;
-      
+
       pt.lifespan = pt.totalLifespan
       this.points.push(pt);
 
@@ -305,35 +304,32 @@ let brushes = [
     },
 
     draw() {
-      
+
       let radius = 5
       let t = p.millis() * .001;
-      
-    
-      
+
       // Each point keeps drawing itself, as long as it has a lifespan
       this.points.forEach((pt, index) => {
         //
         pt.lifespan--;
 
         if (pt.lifespan > 0) {
-        
+
           let pctLife = pt.lifespan/pt.totalLifespan
           let r = radius*.5
           let theta = p.noise(index, t*.1)*100;
-          
+
           // Grow in some direction
           pt[0] += r * Math.cos(theta);
           pt[1] += r * Math.sin(theta);
-          
-            
+
           p.noStroke()
-           p.fill(color0[0], color0[1], color0[2]*.1, .1)
+          p.fill(color0[0], color0[1], color0[2]*.1, .1)
           p.circle(...pt, (pctLife)*radius*2);
-         
+
           p.fill(color0[0] + p.noise(index)*40, color0[1], color0[2]*(1 - pctLife))
-          
-//           Get smaller at the end of your life
+
+          //           Get smaller at the end of your life
           p.circle(...pt, (pctLife**.2)*radius);
         }
       });
