@@ -344,7 +344,7 @@ let brushes = [
 
         } else {
           if (pt.generation < this.maxGenerations) {
-            rotationRadians = brushSize * 75 * Math.PI / 180;
+            let rotationRadians = brushSize * 75 * Math.PI / 180;
             let pt1DirectionX = pt[2] * Math.cos(rotationRadians) - pt[3] * Math.sin(rotationRadians);
             let pt1DirectionY = pt[2] * Math.sin(rotationRadians) + pt[3] * Math.cos(rotationRadians);
 

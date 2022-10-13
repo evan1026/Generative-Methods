@@ -41,6 +41,7 @@ window.addEventListener("load", function () {
   };
 
   function setBrush(index) {
+    console.log("Selecting brush ", index);
     let activeBrushes = brushes.filter(b=>b.isActive);
     let brush = activeBrushes[index];
     const DESC_EL = document.getElementById("brush-desc");
@@ -66,7 +67,7 @@ window.addEventListener("load", function () {
   //   Set the initial brush and color values
   let maxIndex = brushes.filter(b=>b.isActive).length - 1;
 
-  if (localStorage.getItem("lastbrush") === undefined || localStorage.getItem("lastbrush") > maxIndex) {
+  if (localStorage.getItem("lastbrush") === null || localStorage.getItem("lastbrush") > maxIndex) {
     setBrush(0);
   } else {
     setBrush(localStorage.getItem("lastbrush"));

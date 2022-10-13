@@ -138,6 +138,8 @@ a {
 #canvas-holder {
   position: relative;
   margin:  0px auto;
+  border: 1px solid var(--color-separator);
+  box-sizing: content-box;
 }
 
 #controls {
