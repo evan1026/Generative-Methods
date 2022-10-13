@@ -157,3 +157,6 @@ a {
   flex-direction: row;
 }
 
+#buttons {
+  display: flex;
+}

@@ -35,11 +35,47 @@ let brushes = [
     },
   },
 
+  {
+    label: "➰",
+    isActive: true,
+    description: "Smooth Shape Tool",
+
+    mousePressed() {
+      p.loadPixels();
+      this.pixels = [...p.pixels];  // Save the original canvas so we can continually redraw over it
+      this.points = [];
+    },
+
+    mouseReleased() {
+      this.pixels = [];  // Throw away the old canvas just to save some memory
+    },
+
+    mouseDragged() {
+      let x = p.mouseX;
+      let y = p.mouseY;
+      this.points.push([x, y]);
+
+      p.loadPixels();
+      p.pixels = [...this.pixels];
+      p.updatePixels();
+
+      p.stroke(...color0);
+      p.fill(...color1);
+      p.strokeWeight(brushSize * 100 + 2);
+
+      p.beginShape();
+      this.points.forEach(point => {
+        p.curveVertex(point[0], point[1]);
+      });
+      p.endShape();
+    },
+  },
+
   //======================================================
   // Example brushes
   {
     label: "✏️",
-    isActive: true,
+    isActive: false,
     description:
     "A basic paint brush.  It uses the color0 and size properties set by the sliders.  It is a 'discrete' brush",
 
@@ -62,8 +98,8 @@ let brushes = [
 
   //======================================================
   {
-    label: "〰",
-    isActive: true,
+    label: "│",
+    isActive: false,
     description:
     "A basic line brush.  It uses pmouseX,pmouseY to draw to where the last mouse position was.  It is a *continuous* brush",
 
@@ -90,7 +126,7 @@ let brushes = [
 
   {
     label: "🧵",
-    isActive: true,
+    isActive: false,
     description: "A continuous brush using curves",
 
     mousePressed() {
@@ -129,7 +165,7 @@ let brushes = [
   }, //======================================================
   {
     label: "🌱",
-    isActive: true,
+    isActive: false,
     description: "Growing brush, leaves behind a trail that .... moves each frame!",
 
     setup() {
