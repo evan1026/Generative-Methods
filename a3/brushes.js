@@ -1,5 +1,5 @@
-const CANVAS_WIDTH = 600;
-const CANVAS_HEIGHT = 400;
+const CANVAS_WIDTH = 900;
+const CANVAS_HEIGHT = 600;
 
 // Current tool settings
 let p; // Processing object, accessible from anywhere
@@ -35,7 +35,6 @@ let brushes = [
     },
   },
 
-  //======================================================
   //======================================================
   // Example brushes
   {
@@ -89,152 +88,6 @@ let brushes = [
 
   //======================================================
 
-  {
-    label: "🖌",
-    isActive: true,
-    description:
-    "Complicated discrete brush. It uses the color0, color1, and size properties set by the sliders",
-
-    setup() {
-      //       Count how many times we've drawn
-      this.drawCount = 0;
-    },
-
-    // Options: setup (when tool is selected), draw (every frame),
-    mouseDragged() {
-      //       Here I am keeping track of both the current time, and how many times this brush has drawn
-
-      let t = p.millis() * 0.001; // Get the number of seconds
-      this.drawCount += 1;
-      let x = p.mouseX;
-      let y = p.mouseY;
-
-      //       Controllable brush size
-      let r = brushSize * 10 + 10;
-
-      //       Change the brush by how many we have drawn
-      // r *= 0.5 + p.noise(this.drawCount * 0.1);
-      //       Change the brush by the current time
-      // r *= 0.5 + p.noise(t * 10);
-
-      //       Shadow
-      p.noStroke();
-      p.fill(color0[0], color0[1], color0[2] * 0.2, 0.1);
-      p.circle(x, y + r * 0.15, r * 1.1);
-
-      // Big circle
-      p.noStroke();
-      p.fill(color0[0], color0[1], color0[2]);
-      p.circle(x, y, r);
-
-      // Small contrast circle
-      p.noStroke();
-      p.fill(color1[0], color1[1], color1[2]);
-      p.circle(x - r * 0.1, y - r * 0.1, r * 0.7);
-
-      //       Highlight
-      p.noStroke();
-      p.fill(color1[0], color1[1], color1[2] * 1.4);
-      p.circle(x - r * 0.15, y - r * 0.15, r * 0.5);
-    },
-  },
-
-  //======================================================
-
-  {
-    label: "💦",
-    description:
-    "Scatter brush, places lots of dots in both colors (discrete!)",
-    isActive: true,
-
-    mouseDragged() {
-      let t = p.millis() * 0.001;
-      let x = p.mouseX;
-      let y = p.mouseY;
-
-      let brushSize = 20;
-      let count = 6;
-
-      // Scale the cluster by how far we have moved since last frame
-      // the "magnitude" of the (movedX, movedY) vector
-      let distanceTravelled = p.mag(p.movedX, p.movedY);
-      brushSize = distanceTravelled * 2 + 10;
-
-      // I often draw a shadow behind my brush,
-      // it helps it stand out from the background
-      p.noStroke();
-      p.fill(0, 0, 0, 0.01);
-      p.circle(x, y, brushSize * 2);
-
-      // Draw some dots
-
-      for (var i = 0; i < count; i++) {
-        // Offset a polar
-        let r = brushSize * Math.random();
-        let theta = Math.random() * Math.PI * 2;
-
-        let brightnessBump = Math.random() * 50 - 20;
-        brightnessBump = 20 * Math.sin(t * 7);
-
-        let opacity = Math.random() * 0.5 + 0.2;
-        if (Math.random() > 0.5)
-          p.fill(color0[0], color0[1], color0[2] + brightnessBump, opacity);
-        else p.fill(color1[0], color1[1], color1[2] + brightnessBump, opacity);
-
-        let circleSize = (Math.random() + 1) * brushSize * 0.2;
-
-        let x2 = x + r * Math.cos(theta);
-        let y2 = y + r * Math.sin(theta);
-        p.circle(x2, y2, circleSize);
-      }
-    },
-  },
-
-  //======================================================
-
-  {
-    label: "💕",
-    description: "Emoji scatter brush",
-    isActive: true,
-
-    mouseDragged() {
-      let hearts = ["💙", "🧡", "💛", "💖", "💚", "💜"];
-      let x = p.mouseX;
-      let y = p.mouseY;
-
-      let brushSize = 20;
-      let count = 2;
-
-      // Scale the cluster by how far we have moved since last frame
-      // the "magnitude" of the (movedX, movedY) vector
-      let distanceTravelled = p.mag(p.movedX, p.movedY);
-      brushSize = distanceTravelled * 2 + 10;
-
-      // I often draw a shadow behind my brush,
-      // it helps it stand out from the background
-      p.noStroke();
-      p.fill(0, 0, 0, 0.01);
-      p.circle(x, y, brushSize * 2);
-      p.circle(x, y, brushSize * 1);
-
-      // Draw some emoji
-      p.fill(1);
-
-      for (var i = 0; i < count; i++) {
-        // Offset a polar
-        let r = brushSize * Math.random();
-        let theta = Math.random() * Math.PI * 2;
-        p.textSize(brushSize);
-        let emoji = p.random(hearts);
-
-        let x2 = x + r * Math.cos(theta);
-        let y2 = y + r * Math.sin(theta);
-        p.text(emoji, x2, y2);
-      }
-    },
-  },
-
-  //======================================================
   {
     label: "🧵",
     isActive: true,
