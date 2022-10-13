@@ -20,11 +20,15 @@ window.addEventListener("load", function () {
     };
 
     p.mouseDragged = function () {
-      if (activeTool.mouseDragged) activeTool.mouseDragged();
+      if (p.mouseX >= 0 && p.mouseX < CANVAS_WIDTH && p.mouseY >= 0 && p.mouseY < CANVAS_HEIGHT) {
+        if (activeTool.mouseDragged) activeTool.mouseDragged();
+      }
     };
 
     p.mousePressed = function () {
+      if (p.mouseX >= 0 && p.mouseX < CANVAS_WIDTH && p.mouseY >= 0 && p.mouseY < CANVAS_HEIGHT) {
         if (activeTool.mousePressed) activeTool.mousePressed();
+      }
     };
 
     p.mouseReleased = function () {

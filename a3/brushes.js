@@ -21,17 +21,37 @@ let brushes = [
     isActive: true,
     description: "Eraser",
 
+    setup() {
+      p.loadPixels();
+      this.pixels = [...p.pixels];  // Save the original canvas so we can continually redraw over it
+    },
+
     draw() {
       let x = p.mouseX;
       let y = p.mouseY;
       let x1 = p.pmouseX;
       let y1 = p.pmouseY;
 
+      this.pixels.forEach((value, index) => {
+        p.pixels[index] = value;
+      });
+      p.updatePixels();
+
       if (p.mouseIsPressed) {
         p.stroke(0, 0, 100);
         p.strokeWeight(brushSize * 100 + 2);
         p.line(x, y, x1, y1);
+
+        p.loadPixels();
+        p.pixels.forEach((value, index) => {
+          this.pixels[index] = value;
+        });
       }
+
+      p.stroke(0, 0, 0);
+      p.strokeWeight(1);
+      p.fill(0, 0, 100);
+      p.ellipse(x, y, (brushSize * 100 + 2) / 2);
     },
   },
 
@@ -43,8 +63,6 @@ let brushes = [
     mousePressed() {
       p.loadPixels();
       this.pixels = [...p.pixels];  // Save the original canvas so we can continually redraw over it
-      console.log("PRESSED");
-      console.log(this.pixels);
       this.center = [p.mouseX, p.mouseY];
     },
 
