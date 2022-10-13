@@ -10,7 +10,7 @@ let brushSize = 1;
 function startDrawing(p) {
   // Change if you want to start with a different background,
   // or even *no background!*
-  p.background(0, 0, 50);
+  p.background(0, 0, 100);
 }
 
 let brushes = [
@@ -18,15 +18,20 @@ let brushes = [
   //======================================================
   {
     label: "🕳",
-    isActive: false,
+    isActive: true,
     description: "Eraser",
 
-    setup() {
-      //       When the user clicks erase, what happens?
-    },
-    
-    mouseDragged() {
-      //       When the user drags erase, what happens?
+    draw() {
+      let x = p.mouseX;
+      let y = p.mouseY;
+      let x1 = p.pmouseX;
+      let y1 = p.pmouseY;
+
+      if (p.mouseIsPressed) {
+        p.stroke(0, 0, 100);
+        p.strokeWeight(brushSize * 100 + 2);
+        p.line(x, y, x1, y1);
+      }
     },
   },
 
@@ -35,7 +40,7 @@ let brushes = [
   // Example brushes
   {
     label: "✏️",
-    isActive: false,
+    isActive: true,
     description:
       "A basic paint brush.  It uses the color0 and size properties set by the sliders.  It is a 'discrete' brush",
 
@@ -44,7 +49,6 @@ let brushes = [
     // draw (every frame, even if the mouse isn't down),
     // mouseDragged (when the mouse is dragged)
     mouseDragged() {
-      console.log("Dragged")
       let x = p.mouseX;
       let y = p.mouseY;
       let r = brushSize * 5 + 1;
@@ -68,7 +72,6 @@ let brushes = [
     // each "frame" which is slightly different than
     // each time we drag the mouse
     draw() {
-      console.log("draw")
       let x = p.mouseX;
       let y = p.mouseY;
       let x1 = p.pmouseX;
