@@ -137,7 +137,7 @@ let brushes = [
       this.points = [];
       this.gravity = 10000;
       this.prevT = p.millis() * 0.001;
-      this.colorProgression = [[60, 100, 50], [45, 100, 50], [30, 100, 50], [15, 100, 50], [0, 100, 50], [0, 100, 50], [0, 50, 50], [0, 25, 50], [0, 0, 50]];
+      this.colorProgression = [[60, 100, 50], [60, 100, 50],[60, 100, 50],[60, 100, 50],[45, 100, 50], [30, 100, 50], [15, 100, 50], [0, 100, 50], [0, 100, 50], [0, 50, 50], [0, 25, 50], [0, 0, 50]];
     },
 
     mouseDragged() {
@@ -197,7 +197,7 @@ let brushes = [
           newPt.spawnedChild = false;
           newPt.totalLifespan = pt.totalLifespan + 0.5;
           newPt.lifespan = newPt.totalLifespan;
-          newPt.strokeWidth = pt.strokeWidth + 0.25;
+          newPt.strokeWidth = pt.strokeWidth + 0.5;
 
           pt.spawnedChild = true;
 
