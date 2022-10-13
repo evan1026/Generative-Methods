@@ -15,6 +15,7 @@
   --github-logo: url("https://cdn.glitch.global/903c4ba5-9ead-4808-9a2d-e35d2bbd6c31/GitHub-Mark-64px.png?v=1664404019285");
   --a1-image: url("https://cdn.glitch.global/903c4ba5-9ead-4808-9a2d-e35d2bbd6c31/Screenshot_2022-09-28_19-37-53.png?v=1664411883344");
   --a2-image: url("https://cdn.glitch.global/903c4ba5-9ead-4808-9a2d-e35d2bbd6c31/a2-light.png?v=1665020406522");
+  --a3-image: url("https://cdn.glitch.global/903c4ba5-9ead-4808-9a2d-e35d2bbd6c31/a3-light.png?v=1665632827648");
 }
 
 .dark-theme {
@@ -27,6 +28,7 @@
   --github-logo: url("https://cdn.glitch.global/903c4ba5-9ead-4808-9a2d-e35d2bbd6c31/GitHub-Mark-Light-64px.png?v=1664404027250");
   --a1-image: url("https://cdn.glitch.global/903c4ba5-9ead-4808-9a2d-e35d2bbd6c31/Screenshot_2022-09-28_19-34-09.png?v=1664411665420");
   --a2-image: url("https://cdn.glitch.global/903c4ba5-9ead-4808-9a2d-e35d2bbd6c31/a2-dark.png?v=1665020375297");
+  --a3-image: url("https://cdn.glitch.global/903c4ba5-9ead-4808-9a2d-e35d2bbd6c31/a3-dark.png?v=1665632813906");
 }
 
 /* Basic page style resets */
