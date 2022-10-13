@@ -280,4 +280,100 @@ let brushes = [
       }
     },
   },
+  {
+    label: "🌱",
+    isActive: true,
+    description: "Tree Tool - use brush size to determine spread angle",
+
+    setup() {
+      this.points = [];
+      this.brown = [16, 68, 22];
+      this.green = [120, 100, 50];
+      this.darkgreen = [120, 100, 25];
+      this.maxGenerations = 6;
+      this.moveSpeed = 2;
+      this.lengthRatio = 3 / 4;
+    },
+
+    mouseDragged() {
+      let x = p.mouseX;
+      let y = p.mouseY;
+
+      let pt = [x, y, 0, -1];
+      pt.start = [x, y];
+
+      // How long does this dot live?
+      pt.totalLifespan = 10 + Math.random()*10;
+      pt.lifespan = pt.totalLifespan;
+
+      pt.generation = 0;
+
+      this.points.push(pt);
+    },
+
+    draw() {
+      let t = p.millis() * .001;
+
+      let newPts = [];
+
+      // Each point keeps drawing itself, as long as it has a lifespan
+      this.points.forEach((pt, index) => {
+        pt.lifespan--;
+
+        if (pt.lifespan > 0) {
+
+          let prevX = pt.start[0];
+          let prevY = pt.start[1];
+
+          pt[0] += pt[2] * this.moveSpeed;
+          pt[1] += pt[3] * this.moveSpeed;
+
+          if (pt.generation > 1) {
+            p.stroke(...this.darkgreen);
+            p.strokeWeight(2);
+            p.line(pt[0], pt[1], prevX, prevY);
+
+            p.stroke(...this.green);
+            p.strokeWeight(1);
+            p.line(pt[0], pt[1], prevX, prevY);
+          } else {
+            p.stroke(...this.brown);
+            p.strokeWeight(2);
+            p.line(pt[0], pt[1], prevX, prevY);
+          }
+
+        } else {
+          if (pt.generation < this.maxGenerations) {
+            rotationRadians = brushSize * 75 * Math.PI / 180;
+            let pt1DirectionX = pt[2] * Math.cos(rotationRadians) - pt[3] * Math.sin(rotationRadians);
+            let pt1DirectionY = pt[2] * Math.sin(rotationRadians) + pt[3] * Math.cos(rotationRadians);
+
+            let pt2DirectionX = pt[2] * Math.cos(-rotationRadians) - pt[3] * Math.sin(-rotationRadians);
+            let pt2DirectionY = pt[2] * Math.sin(-rotationRadians) + pt[3] * Math.cos(-rotationRadians);
+
+            let newPt1 = [pt[0], pt[1], pt1DirectionX, pt1DirectionY];
+            let newPt2 = [pt[0], pt[1], pt2DirectionX, pt2DirectionY];
+
+            newPt1.start = [pt[0], pt[1]];
+            newPt2.start = [pt[0], pt[1]];
+
+            newPt1.totalLifespan = pt.totalLifespan * this.lengthRatio;
+            newPt1.lifespan = newPt1.totalLifespan;
+            newPt2.totalLifespan = pt.totalLifespan * this.lengthRatio;
+            newPt2.lifespan = newPt2.totalLifespan;
+
+            newPt1.generation = pt.generation + 1;
+            newPt2.generation = pt.generation + 1;
+
+            newPts.push(newPt1);
+            newPts.push(newPt2);
+          }
+        }
+
+      });
+
+      this.points = this.points.filter(point => point.lifespan > 0);
+      this.points = this.points.concat(newPts);
+    },
+  },
 ];
