@@ -15,20 +15,10 @@ class GravitySystem extends ParticleSystem {
 
     this.gravity = 1;
     this.prevDebugDraw = false;
-
-    p.background(0, 0, 0, 1);
   }
 
   draw(p) {
-    let debugDraw = DEBUG_DRAW_EL.checked;
-
-    if (this.prevDebugDraw) {
-      p.background(0, 0, 0, 1);
-    } else {
-      p.background(0, 0, 0, 0.05);
-    }
-
-    this.prevDebugDraw = debugDraw;
+    p.background(0, 0, 0, 1);
 
     // The "super-class" draws the particles
     super.draw(p)
@@ -56,12 +46,15 @@ class GravityParticle extends Particle {
 
       this.v.setToPolar(r * 10, theta + Math.PI / 2);
 
-      this.hue = (index * 100) % 360;
+      this.hue = (index * 75) % 360;
       this.radius = 2;
       this.mass = 1;
     }
 
     this.ps = ps;
+
+    this.prevPositions = [];
+    this.maxPositionHistory = 1000;
 
   }
 
@@ -120,16 +113,32 @@ class GravityParticle extends Particle {
 
     let t = p.millis() * 0.001;
 
+
+    if (drawDebug) {
+      this.pos.drawArrow(p, this.f, {m: 0.01, color: [0, 0, 100]});
+      this.pos.drawArrow(p, this.v, {m: 10, color: [50, 50, 50]});
+    } else {
+      p.stroke(this.hue, 50, 30);
+
+      let currentPos = this.pos;
+      for (let i = 0; i < this.prevPositions.length; ++i) {
+        p.line(...currentPos, ...this.prevPositions[i]);
+        currentPos = this.prevPositions[i];
+      }
+
+    }
+
+    this.prevPositions.unshift(new Vector2D(...this.pos));
+
+    if (this.prevPositions.length > this.maxPositionHistory) {
+      this.prevPositions.pop();
+    }
+
     p.noStroke()
     p.fill(this.hue, 50, 50)
     p.circle(...this.pos, this.radius)
     p.fill(this.hue, 70, 60)
     p.circle(...this.pos, this.radius*.7)
-
-    if (drawDebug) {
-      this.pos.drawArrow(p, this.f, {m: 0.01, color: [0, 0, 100]});
-      this.pos.drawArrow(p, this.v, {m: 10, color: [50, 50, 50]});
-    }
 
   }
 }
