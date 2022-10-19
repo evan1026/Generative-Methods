@@ -19,7 +19,7 @@ let DEBUG_DRAW_EL
 window.addEventListener("load", function () {
   console.log("LOADED");
   let system;
-  
+
   let activeTool = undefined;
   // Create a P5 canvas element, JS-style
   // https://github.com/processing/p5.js/wiki/p5.js-overview#instantiation--namespace
@@ -27,7 +27,7 @@ window.addEventListener("load", function () {
     p = p0;
     p.setup = function () {
       //       For each class, create a new system
-      
+
       p.createCanvas(CANVAS_WIDTH, CANVAS_HEIGHT);
       p.colorMode(p.HSL, 360, 100, 100);
       p.ellipseMode(p.RADIUS);
@@ -36,43 +36,43 @@ window.addEventListener("load", function () {
     p.draw = function () {
       const SPEED_EL = document.getElementById("speed-slider");
       const speedMult = SPEED_EL.value ** 2;
-      
-       const elapsed = Math.min(0.1, speedMult * p.deltaTime * 0.001);
-     
-      
-     system?.update(p, elapsed);
-      
+
+      const elapsed = Math.min(0.1, speedMult * p.deltaTime * 0.001);
+
+
+      system?.update(p, elapsed);
+
 
       p.push();
-      
+
       system.draw(p)
 
       p.pop();
     };
-    
-        
-     p.mouseMoved = function () {
-        if (system.mouseMoved) system.mouseMoved(p);
-    
+
+
+    p.mouseMoved = function () {
+      if (system.mouseMoved) system.mouseMoved(p);
+
     };
-    
-       p.mouseDragged = function () {
+
+    p.mouseDragged = function () {
       if (system.mouseDragged) system.mouseDragged(p);
     };
 
     p.mousePressed = function () {
-        if (system.mousePressed) system.mousePressed(p);
-    
+      if (system.mousePressed) system.mousePressed(p);
+
     };
-    
-     p.mouseClicked = function () {
-        if (system.mouseClicked) system.mouseClicked(p);
-    
+
+    p.mouseClicked = function () {
+      if (system.mouseClicked) system.mouseClicked(p);
+
     };
 
     p.mouseReleased = function () {
-        if (system.mouseReleased) system.mouseReleased(p);
-    
+      if (system.mouseReleased) system.mouseReleased(p);
+
     };
 
   };
@@ -81,44 +81,45 @@ window.addEventListener("load", function () {
   CANVAS_EL.style.width = CANVAS_WIDTH + "px";
   CANVAS_EL.style.height = CANVAS_HEIGHT + "px";
   DEBUG_DRAW_EL = document.getElementById("debug-draw");
-  
+
   DEBUG_DRAW_EL.addEventListener("change", () => {
-      localStorage.setItem("lastdebug", DEBUG_DRAW_EL.checked)
-    
-    });
+    localStorage.setItem("lastdebug", DEBUG_DRAW_EL.checked)
+
+  });
   console.log(localStorage.getItem("lastdebug") )
- DEBUG_DRAW_EL.checked = JSON.parse(localStorage.getItem("lastdebug"))
-  
-//   Create the p5 instance
+  DEBUG_DRAW_EL.checked = JSON.parse(localStorage.getItem("lastdebug"))
+
+  //   Create the p5 instance
   new p5(s, CANVAS_EL);
-  
-  
+
+
   function setSystem(systemClass) {
     console.log("initialize", systemClass.name)
     system = new systemClass()
     localStorage.setItem("lastsystem", systemClass.name)
+    document.getElementById("system-desc").innerHTML = systemClass.desc;
   }
-  
+
   let savedName = localStorage.getItem("lastsystem")
   console.log("load last-loaded system", savedName)
   let savedClass = SYSTEMS.find(s => s.name === savedName)
   if (savedClass)
     setSystem(savedClass);
   else 
-     setSystem(SYSTEMS[0]);
- 
+    setSystem(SYSTEMS[0]);
+
 
   const BUTTON_HOLDER_EL = document.getElementById("buttons");
 
   SYSTEMS
     .forEach((system, index) => {
-    let button = document.createElement("button");
-    button.innerHTML = system.label;
+      let button = document.createElement("button");
+      button.innerHTML = system.label;
 
-    BUTTON_HOLDER_EL.appendChild(button);
+      BUTTON_HOLDER_EL.appendChild(button);
 
-    button.addEventListener("click", () => {
-      setSystem(system);
+      button.addEventListener("click", () => {
+        setSystem(system);
+      });
     });
-  });
 });
