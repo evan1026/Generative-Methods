@@ -118,10 +118,9 @@ class GravityParticle extends Particle {
       this.pos.drawArrow(p, this.f, {m: 0.01, color: [0, 0, 100]});
       this.pos.drawArrow(p, this.v, {m: 10, color: [50, 50, 50]});
     } else {
-      p.stroke(this.hue, 50, 30);
-
       let currentPos = this.pos;
       for (let i = 0; i < this.prevPositions.length; ++i) {
+        p.stroke(this.hue, 50, 30, (this.maxPositionHistory - i) / this.maxPositionHistory);
         p.line(...currentPos, ...this.prevPositions[i]);
         currentPos = this.prevPositions[i];
       }
