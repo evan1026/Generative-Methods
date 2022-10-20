@@ -6,12 +6,12 @@
 
 /* globals p5, ParticleSystem, WindSystem, RocketSystem, BasicSystem */
 
-const SYSTEMS = [AntSystem, GravitySystem];
+const SYSTEMS = [AntSystem, GravitySystem, BasicSystem];
 
 
 let p;
-const CANVAS_WIDTH = 400;
-const CANVAS_HEIGHT = 300;
+const CANVAS_WIDTH = 600;
+const CANVAS_HEIGHT = 400;
 
 let DEBUG_DRAW_EL 
 
