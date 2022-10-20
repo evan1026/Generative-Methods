@@ -16,6 +16,7 @@
   --a1-image: url("https://cdn.glitch.global/903c4ba5-9ead-4808-9a2d-e35d2bbd6c31/Screenshot_2022-09-28_19-37-53.png?v=1664411883344");
   --a2-image: url("https://cdn.glitch.global/903c4ba5-9ead-4808-9a2d-e35d2bbd6c31/a2-light.png?v=1665020406522");
   --a3-image: url("https://cdn.glitch.global/903c4ba5-9ead-4808-9a2d-e35d2bbd6c31/a3-light.png?v=1665632827648");
+  --a4-image: url("https://cdn.glitch.global/903c4ba5-9ead-4808-9a2d-e35d2bbd6c31/a4-light.png?v=1666232718589");
 }
 
 .dark-theme {
@@ -29,6 +30,7 @@
   --a1-image: url("https://cdn.glitch.global/903c4ba5-9ead-4808-9a2d-e35d2bbd6c31/Screenshot_2022-09-28_19-34-09.png?v=1664411665420");
   --a2-image: url("https://cdn.glitch.global/903c4ba5-9ead-4808-9a2d-e35d2bbd6c31/a2-dark.png?v=1665020375297");
   --a3-image: url("https://cdn.glitch.global/903c4ba5-9ead-4808-9a2d-e35d2bbd6c31/a3-dark.png?v=1665632813906");
+  --a4-image: url("https://cdn.glitch.global/903c4ba5-9ead-4808-9a2d-e35d2bbd6c31/a4-dark.png?v=1666232701011");
 }
 
 /* Basic page style resets */
