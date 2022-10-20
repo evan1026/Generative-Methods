@@ -87,7 +87,9 @@ class BasicParticle extends Particle {
     p.circle(...this.pos, this.radius*.7)
 
     if (drawDebug) {
-      this.pos.drawArrow(p, this.f, {m: 1})
+      if (this.f.magnitude > 0.1) {
+        this.pos.drawArrow(p, this.f, {m: 1})
+      }
     }
 
   }

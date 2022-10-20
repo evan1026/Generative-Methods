@@ -6,18 +6,19 @@
  */
 
 class WindSystem extends ParticleSystem {
-  static label = "🍂"; // Ignore the Glitch parse error
-  
+  static label = "🐟"; // Ignore the Glitch parse error
+  static desc = "Fish swimming in water"
+
   constructor() {
     // Make wind particles
     super(WindParticle, 100);
     this.windScale = 0.001;
   }
-  
+
   draw(p) {
-    
-    p.background(0, 0, 50)
-    
+
+    p.background(240, 50, 50)
+
     // The "super-class" draws the particles
     super.draw(p)
   }
@@ -37,10 +38,10 @@ class WindSystem extends ParticleSystem {
 class WindParticle extends Particle {
   constructor(ps, index) {
     super(ps, index);
-    
-    
-    this.angle = Math.random()*200
-    this.hue = Math.random()*60
+
+    this.angle = 0;
+
+    this.hue = Math.random()*60 + 120;
 
     // Put these particles somewhere randomly on screen
     this.pos.setToRandom(0, p.width, 0, p.height); // Set to a random (x0,x1,y0,y1)
@@ -56,31 +57,13 @@ class WindParticle extends Particle {
     // Apply some "drag" by making the velocity smaller
     this.v.mult(0.99);
 
-    this.f.add(0, 40);
-
-    //     Different "wander forces"
-
     let windX = this.ps.windScale * this.pos[0];
     let windY = this.ps.windScale * this.pos[1];
 
-    // Which way to go?
-    // Set the wind from just the time (note how they synchronize)
-    let windDir = 20 * p.noise(t * 0.1);
-
-    // These use both their *idNumber* (each particle gets a unique number on "birth")
-    // and the time.  Now they each have their own "journey"
-    // windDir = 20 * p.noise(t * 0.1, this.idNumber);
-
-    // Set the wind from their positions
-    // But if they have the same position, eventually
-    // they clump up
-    // windDir = 20*p.noise(windX, windY)
-
     // If we do *both*, they clump less!
-    windDir = 20*p.noise(windX, windY, t*.1)
-    
-    // Spin with the wind!
-    this.angle += Math.sin(windDir)*.1
+    let windDir = 20*p.noise(windX, windY, t*.1)
+
+    this.angle = Math.sin(this.pos.magnitude / 10) / 10;
 
     this.windForce.setToPolar(100, windDir);
     this.f.add(this.windForce);
@@ -92,22 +75,17 @@ class WindParticle extends Particle {
 
     this.pos.wrapX(0, p.width);
     this.pos.wrapY(0, p.height);
-    
+
   }
 
   draw(p, drawDebug = false) {
     let t = p.millis() * 0.001;
-  
-    // Basic drawing
-    p.noStroke()
-    p.fill(100);
-    p.circle(...this.pos, 2);
 
     // FANCY DRAWING!
     // Move to where this particle is
     p.push();
     p.translate(...this.pos);
-    
+
     // Align with the current
     p.rotate(this.v.angle + this.angle);
     p.fill(
@@ -116,21 +94,16 @@ class WindParticle extends Particle {
       30 + 30 * p.noise(this.idNumber + t + 100)
     );
 
-    // Make a leaf shape
-    // If we make the width thin and thick, 
-    // the leaves look like they are spinning
-    // Change the multiplier on t to see them twirl *faster*
-    
-    p.scale(1, .5 + .5*Math.sin(this.idNumber + t*5) + .1)
-    
     let leafWidth = 6
     let leafLength = 20
     p.beginShape();
-    p.vertex(-leafLength*.5, 0);
-    p.curveVertex(leafLength*-.1, -leafWidth);
-    p.vertex(leafLength*.5, 0);
-    p.curveVertex(leafLength*-.1, leafWidth);
-    p.vertex(-leafLength*.5, 0);
+    p.vertex(-leafLength*.5, -leafWidth);
+    p.vertex(-leafLength*.5, -leafWidth);
+    p.vertex(leafLength * .16, leafWidth);
+    p.curveVertex(leafLength*.5, 0);
+    p.curveVertex(leafLength * .16, -leafWidth);
+    p.vertex(-leafLength*.5, leafWidth);
+    p.vertex(-leafLength*.5, leafWidth);
     p.endShape(p.CLOSE);
     p.pop();
 
