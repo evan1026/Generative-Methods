@@ -60,7 +60,7 @@ class AntParticle extends Particle {
 
     if (drawDebug) {
       this.pos.drawArrow(p, this.v, {m: 5, color: [0, 0, 0]});
-    } else {
+      this.pos.drawArrow(p, this.f, {m: 0.5, color: [50, 30, 30]});
     }
 
 

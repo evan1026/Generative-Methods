@@ -23,6 +23,15 @@ class GravitySystem extends ParticleSystem {
     super.draw(p)
 
   }
+
+  mousePressed(p) {
+    super.mousePressed(p);
+    if (!this.held) {
+      let pt = new GravityParticle(this, this.particles.length, new Vector2D(p.mouseX, p.mouseY));
+      pt.pos.setTo(p.mouseX, p.mouseY);
+      this.particles.push(pt);
+    }
+  }
 }
 
 //=========================================================================
@@ -30,7 +39,7 @@ class GravitySystem extends ParticleSystem {
 //=========================================================================
 
 class GravityParticle extends Particle {
-  constructor(ps, index) {
+  constructor(ps, index, position = null) {
     super(ps, index);
 
     if (index == 0) {
@@ -39,12 +48,23 @@ class GravityParticle extends Particle {
       this.radius = 10;
       this.mass = 300000;
     } else {
-      let r = 30 + index * 10;
-      let theta = Math.random() * 2 * Math.PI;
-      this.pos.setToPolar(r, theta).add(p.width/2, p.height/2);
+      let r;
+      let theta;
+
+      if (position === null) {
+        r = 30 + index * 10;
+        theta = Math.random() * 2 * Math.PI;
+        this.pos.setToPolar(r, theta).add(p.width/2, p.height/2);
+
+      } else {
+        this.pos.setTo(...position);
+        let center = new Vector2D(p.width / 2, p.height / 2);
+        center.sub(this.pos);
+        theta = Math.atan2(center[1], center[0]);
+        r = center.magnitude / 5;
+      }
 
       this.v.setToPolar(r * 10, theta + Math.PI / 2);
-
       this.hue = (index * 75) % 360;
       this.radius = 2;
       this.mass = 1;
@@ -53,7 +73,7 @@ class GravityParticle extends Particle {
     this.ps = ps;
 
     this.prevPositions = [];
-    this.maxPositionHistory = 1000;
+    this.maxPositionHistory = 100;
 
   }
 
