@@ -14,7 +14,6 @@ class GravitySystem extends ParticleSystem {
     super(GravityParticle, 6);
 
     this.gravity = 1;
-    this.prevDebugDraw = false;
   }
 
   draw(p) {
