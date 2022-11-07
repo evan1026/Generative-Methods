@@ -1,48 +1,89 @@
 <!DOCTYPE html>
-<meta charset="utf-8" />
-<html>
+<html lang="en">
   <head>
-    <!-- Google fonts, remove or replace! -->
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;800&family=Nunito:ital,wght@0,300;0,400;1,300&display=swap"
-      rel="stylesheet"
-    />
 
-    <title>Kate Compton -</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="icon" href="https://glitch.com/favicon.ico" />
 
-    <!-- CSS -->
-    <link rel="stylesheet" href="style.css" />
+    <title>evan1026 - Parametric</title>
 
-    <!-- External libs -->
-    <!-- 	<script  src="js/vendor/kates-utilities.js"></script> -->
-    <script src="https://cdn.jsdelivr.net/npm/p5@1.4.2/lib/p5.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/vue@2.7.13/dist/vue.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/seedrandom/3.0.5/seedrandom.min.js"></script>
-    <script
-      src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.5.0/addons/p5.sound.js"></script>
+    <!-- Meta tags for SEO and social sharing -->
+    <link rel="canonical" href="https://evan1026-a5.glitch.me/" />
+    <meta
+        name="description"
+        content="Parametric by evan1026."
+        />
+    <meta name="robots" content="index,follow" />
+    <meta property="og:title" content="evan1026 - Parametric" />
+    <meta property="og:type" content="article" />
+    <meta property="og:url" content="https://evan1026-a5.glitch.me/" />
+    <meta
+        property="og:description"
+        content="Parametric by evan1026"
+        />
+    <!-- <meta
+      property="og:image"
+      content="https://cdn.glitch.global/903c4ba5-9ead-4808-9a2d-e35d2bbd6c31/Screenshot_2022-09-28_19-34-09.png?v=1664411665420"
+      /> -->
+      <meta name="twitter:card" content="summary" />
 
-    <!-- Vector utilities-->
-    <script src="Vector2D.js"></script>
-    <script src="vector-utilities.js"></script>
-    <script src="utilities.js"></script>
+      <!-- CSS related -->
+      <link rel="stylesheet" href="/style.css" />
+      <script src="/themes.js" defer></script>
 
-    <!-- Your code in here -->
-    <script src="generators.js"></script>
+      <script src="https://cdn.jsdelivr.net/npm/p5@1.4.2/lib/p5.js"></script>
+      <script src="https://cdn.jsdelivr.net/npm/vue@2.7.13/dist/vue.js"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/seedrandom/3.0.5/seedrandom.min.js"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.5.0/addons/p5.sound.js"></script>
 
-    <!-- Sets up all the swatches -->
-    <script src="app.js"></script>
+      <!-- Vector utilities-->
+      <script src="Vector2D.js"></script>
+      <script src="vector-utilities.js"></script>
+      <script src="utilities.js"></script>
+
+      <!-- Your code in here -->
+      <script src="generators.js"></script>
+
+      <!-- Sets up all the swatches -->
+      <script src="app.js"></script>
   </head>
+
   <body>
-    <header>
-      <h1></h1>
-      <a href="https://galaxykate-a1.glitch.me"> my portfolio</a>
-      <a href="https://glitch.com/edit/#!/galaxykate-a3">remix code</a>
-    </header>
+    <div class="page">
 
-    <div id="canvas-holder"></div>
+      <aside class="sidebar">
+        <div id="sidebar-top">
+          <img id="profilePic" src="https://cdn.glitch.global/903c4ba5-9ead-4808-9a2d-e35d2bbd6c31/BrvV0t9.png?v=1664402110564" />
+          <h2>evan1026</h2>
+          <p>Parametric</p>
+          <p><a href="//evan1026-a1.glitch.me">Home</a></p>
+        </div>
+        <div id="sidebar-bottom">
+          <a href="https://github.com/evan1026">
+            <img class="social-media-img" id="github-logo"/>
+          </a>
+          <a href="https://www.linkedin.com/in/evan-allan/">
+            <img class="social-media-img" src="https://cdn.glitch.global/903c4ba5-9ead-4808-9a2d-e35d2bbd6c31/LI-In-Bug.png?v=1664404841862" />
+          </a>
+        </div>
+      </aside>
 
-    <div id="controls"></div>
+      <div class="content">
+
+        <div id="canvas-holder"></div>
+
+        <div id="controls"></div>
+      </div>
+
+    </div>
+
+    <footer class="footer">
+      <div id="footer-left-side"></div>
+      <div id="theme-selector-container">
+        <label for="theme-selector">Theme:</label>
+        <select name="theme-selector" id="theme-selector" class="interaction"></select>
+      </div>
+    </footer>
   </body>
 </html>
