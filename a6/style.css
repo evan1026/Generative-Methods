@@ -314,6 +314,19 @@ button.active {
   background-color: hsla(100, 0%, 0%, 1);
 }
 
+.bot-myBot .chat-row.msg-bot:not(.msg-system) .chat-bubble {
+  background-color: #ff6a6a;
+}
+
+/* only human message in the hauntedHouse */
+.bot-myBot .chat-row.msg-human .chat-bubble {
+  background-color: #5050ff;
+}
+
+/* chat holder the hauntedHouse */
+.bot-myBot .chat-messages {
+  background-color: var(--color-interaction);
+}
 
 /*-------------------------------------------*/
 

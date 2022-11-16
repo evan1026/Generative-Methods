@@ -104,81 +104,86 @@ const BOT_MAPS = {
   },
 
   myBot: {
-    title: "Cocoa-and-Therapy Bot",
+    title: "Rude Bot",
     description: [
-      "a bot for suggesting hot drinks and listening to your problems",
+      "This bot is rude no matter what you do",
     ],
+    chips: ["yes", "no"],
 
     states: {
       origin: {
-        onEnterSay:
-          "I'm your therapeutic cocoa machine. Tell me about your problems while I make you a nice warm drink",
+        onEnterSay: "Do you want to hear a riddle?",
         exits: [
-          "'drink' ->makeDrink",
-          "'drink' ->makeDrink",
-          "'*' ->makeDrink",
+          "'yes' ->riddle",
+          "'sure' ->riddle",
+          "'ok' ->riddle",
+          "'no' ->rude ",
+          "'*' ->origin",
         ],
       },
-
-      makeDrink: {
-        onEnterSay: "I'll make you a #drink#.",
+      riddle: {
+        onEnterSay: "#riddle#",
         exits: [
-          "wait:5 ->origin 'Ah, not quite the right time, I see.' 'Something else maybe?'",
-          "'something else' ->makeDrink 'How about something different then?'",
-          "* ->listen '*SLURP*'",
+          "'me' ->riddle2",
+          "'Me' ->riddle2",
+          "'ME' ->riddle2",
+          "'*' ->goaway '#wrong#! The answer is you! Now get out."
+        ]
+      },
+      riddle2: {
+        onEnterSay: "#correct#! Do you want to hear another riddle?",
+        exits: [
+          "'yes' ->goaway 'Too bad! Now go away please.'",
+          "'sure' ->goaway 'Too bad! Now go away please.'",
+          "'ok' ->goaway 'Too bad! Now go away please.'",
+          "'no' ->rude ",
+          "'*' ->origin",
         ],
       },
-
-      listen0: {
-        onEnterSay: "#askAboutUser#",
+      rude: {
+        onEnterSay: ["#rude#", "#rude#"],
         exits: [
-          "wait:5 ->origin 'Quiet time is good too'",
-          "'*' ->origin '#sympathy#'",
+          "wait:0 -> goaway",
         ],
       },
-      listen1: {
-        onEnterSay: ["#sympathy#", "#askAboutUser#"],
-      },
+      goaway: {
+        onEnterSay: "#goaway#",
+        exits: [
+          "'*' ->@ ",
+        ],
+      }
 
-      exits: ["'*' -> '#sympathy#'"],
     },
     grammar: {
-      askAboutUser: [
-        "How was your day?",
-        "What's on your mind?",
-        "How is this week going?",
+      goaway: [
+        "Go away.",
+        "I don't want to talk to you.",
+        "Please leave.",
+        "I'm not interested in this conversation anymore."
       ],
-      listen: [
-        "mmhmm",
-        "tell me about it",
-        "tell me more?",
-        "does that happen often?",
+      rude: [
+        "That's rude.",
+        "Wow.",
+        "I don't like you.",
+        "You're mean."
       ],
-      sympathy: [
-        "that sounds #difficult#",
-        "you've been through a lot",
-        "it sounds like you are trying very hard",
+      riddle: [
+        "What's black and white and ugly all over?",
+        "What comes once in a minute, twice in a moment, and won't leave me alone?",
+        "It walks on four legs in the morning, two legs at noon, and sticks around when it's not welcome. What is it?",
+        "The more you have of it, the more you want to get rid of it. What is it?"
       ],
-      difficult: ["challenging", "hard", "like a tough time"],
-      toppings: [
-        "caramel sauce",
-        "mini marshmallows",
-        "a candy cane",
-        "sprinkles",
-        "whipped cream",
-        "vegan whip",
-        "marshmallow fluff",
-        "grated nutmeg",
+      wrong: [
+        "WRONG",
+        "Nope",
+        "Incorrect",
+        "lol no"
       ],
-      milk: ["oatmilk", "soy", "whole milk", "skim", "almond milk"],
-      coffeeType: [
-        "latte",
-        "chai",
-        "espresso",
-        "frappe",
-        "mocha",
-        "hot chocolate",
-      ],
+      correct: [
+        "DING DING DING",
+        "Wow look at you, you got it",
+        "I'm surprised you figured that out"
+      ]
     },
   },
 };
