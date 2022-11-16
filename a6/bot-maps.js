@@ -137,7 +137,7 @@ const BOT_MAPS = {
           "'sure' ->goaway 'Too bad! Now go away please.'",
           "'ok' ->goaway 'Too bad! Now go away please.'",
           "'no' ->rude ",
-          "'*' ->origin",
+          "'*' ->riddle2",
         ],
       },
       rude: {
